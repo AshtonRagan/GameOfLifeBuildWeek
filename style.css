@@ -1,0 +1,16 @@
+#main {
+  width: 475px;
+  height: 475px;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 5px;
+  background-color: grey;
+}
+
+.numDiv {
+  width: 15px;
+  height: 15px;
+  margin: 1px;
+  border: 1px solid black;
+  text-align: center;
+}
