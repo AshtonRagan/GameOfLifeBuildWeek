@@ -2,6 +2,7 @@ const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 const genCount = document.getElementById("gen");
 const playBtn = document.getElementById("playBtn");
+const resetBtn = document.getElementById("resetBtn");
 // const main = document.getElementById("main");
 const body = document.querySelector("body");
 const reso = 10;
@@ -12,11 +13,13 @@ const cols = canvas.width / reso;
 const rows = canvas.height / reso;
 let Gen = 0;
 var play = false;
+var reset = false;
 genCount.innerHTML = 0;
 
 main = document.createElement("div");
 main.id = "main";
 body.appendChild(main);
+canvas.remove();
 
 // console.log(Gencont);
 
@@ -41,20 +44,32 @@ const buildGrid = () => {
 //   }
 // };
 
-// const clicky = (dcell) => {
-//   if (dcell.innerHTML === 1) {
-//     dcell.innerHTML = 0;
-//   } else {
-//     dcell.innerHTML = 1;
-//   }
-//   console.log(`${dcell.innerHTML},Id: ${dcell.id}`);
-// };
+const clicky = (dcell, col, row) => {
+  const nextgen = grid.map((arr) => [...arr]);
+
+  if (dcell.innerHTML === "1") {
+    nextgen[col][row] = 0;
+    dcell.innerHTML = "0";
+    // dcell.style.backgroundColor = "white";
+  } else {
+    nextgen[col][row] = 1;
+    dcell.innerHTML = "1";
+    // dcell.style.backgroundColor = "black";
+  }
+  grid = nextgen.map((arr) => [...arr]);
+  uprender(grid);
+  requestAnimationFrame(unrender);
+  //   console.log(`${dcell.innerHTML},Id: ${dcell.id}`);
+
+  console.log(`${dcell.innerHTML},Id: ${dcell.id}`);
+};
 
 const buildDiv = () => {
   div = document.createElement("div");
   div.classList.add("numDiv");
-  //   div.innerHTML = Math.floor(Math.random() * 2);
-
+  //   div.addEventListener("click", () => {
+  //     clicky(div);
+  //   });
   return div;
 };
 
@@ -80,19 +95,9 @@ const render = (grid) => {
       let dcell = buildDiv();
       dcell.innerHTML = cell;
       dcell.id = `C${col}R${row}`;
-
       dcell.addEventListener("click", () => {
         // console.log(dcell);
-        if (dcell.innerHTML === "1") {
-          cell = 0;
-          dcell.innerHTML = "0";
-          dcell.style.backgroundColor = "white";
-        } else {
-          cell = 1;
-          dcell.innerHTML = "1";
-          dcell.style.backgroundColor = "black";
-        }
-        console.log(`${dcell.innerHTML},Id: ${dcell.id}`);
+        clicky(dcell, col, row);
       });
       dcell.style.backgroundColor = dcell.innerHTML === "1" ? "black" : "white";
       main.appendChild(dcell);
@@ -208,22 +213,30 @@ function nextGen(grid) {
   return nextgen;
 }
 
-function update() {
-  if (play === true) {
-    playBtn.innerHTML = "Stop";
-    // main.remove();
-    grid = nextGen(grid);
-    Gen += 1;
-    genCount.innerHTML = Gen;
-    console.log(Gen);
-    render(grid);
-  } else {
-    playBtn.innerHTML = "Play";
-  }
-  requestAnimationFrame(update);
-}
+// function update() {
+//   if (play === true) {
+//     playBtn.innerHTML = "Stop";
+//     // main.remove();
+//     grid = nextGen(grid);
+//     Gen += 1;
+//     genCount.innerHTML = Gen;
+//     console.log(Gen);
+//     render(grid);
+//   } else {
+//     playBtn.innerHTML = "Play";
+//   }
+//   requestAnimationFrame(update);
+// }
 
 const unrender = () => {
+  if (reset) {
+    reset = false;
+    Gen = 0;
+    genCount.innerHTML = Gen;
+    grid = buildGrid();
+    uprender(grid);
+    requestAnimationFrame(unrender);
+  }
   if (play) {
     playBtn.innerHTML = "Stop";
     grid = nextGen(grid);
@@ -245,9 +258,17 @@ const playfunc = () => {
   }
 };
 
+const resetfunc = () => {
+  reset = true;
+  requestAnimationFrame(unrender);
+};
+
 let grid = buildGrid();
-// buildGrid();
-// requestAnimationFrame(unrender);
-playBtn.addEventListener("click", playfunc);
 render(grid);
+// buildGrid();
+playBtn.addEventListener("click", playfunc);
+resetBtn.addEventListener("click", () => {
+  resetfunc();
+});
+requestAnimationFrame(unrender);
 // console.log(grid)
