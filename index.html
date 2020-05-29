@@ -7,10 +7,36 @@
     <title>Game of Life</title>
   </head>
   <h1>Gen: <span id="gen"></span></h1>
-  <canvas></canvas>
-  <!-- <div id="main"></div> -->
-  <button id="playBtn">Play</button>
-  <button id="resetBtn">Reset</button>
+  <div class="btnCont">
+    <button id="playBtn" class="btn">Play</button>
+    <button id="resetBtn" class="btn">Reset</button>
+    <button id="clearBtn" class="btn">Clear</button>
+    <button id="saveBtn" class="btn">Save</button>
+    <input
+      id="saveinput"
+      class="btn"
+      placeholder="Name your Save"
+      name="save"
+    />
+  </div>
+  <div class="mainCont">
+    <div id="main"></div>
+    <div class="rules">
+      <h2>Rules</h2>
+      <ul>
+        <li>Any live cell with two or three live neighbours survives.</li>
+        <li>Any dead cell with three live neighbours becomes a live cell.</li>
+        <li>
+          All other live cells die in the next generation. Similarly, all other
+          dead cells stay dead.
+        </li>
+      </ul>
+    </div>
+  </div>
+  <h3 class="save">Saves</h3>
+  <div id="saveCont" class="saveCont"></div>
+
   <script src="code.js"></script>
+
   <body></body>
 </html>

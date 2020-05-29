@@ -1,25 +1,61 @@
-const canvas = document.querySelector("canvas");
-const ctx = canvas.getContext("2d");
+const arrone = [
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+];
+
 const genCount = document.getElementById("gen");
 const playBtn = document.getElementById("playBtn");
 const resetBtn = document.getElementById("resetBtn");
-// const main = document.getElementById("main");
+const clearBtn = document.getElementById("clearBtn");
+const saveBtn = document.getElementById("saveBtn");
+const saveCont = document.getElementById("saveCont");
+const saveinput = document.getElementById("saveinput");
+const main = document.getElementById("main");
 const body = document.querySelector("body");
+// import { arrone } from "./presets.js";
 const reso = 10;
-canvas.width = 250;
-canvas.height = 250;
+var width = 250;
+var height = 250;
 
-const cols = canvas.width / reso;
-const rows = canvas.height / reso;
+const cols = width / reso;
+const rows = height / reso;
+
+const alive = "#abcbff";
+const dead = "#2d2847";
+var savetext = "";
+var saves = [{ name: "pew", arr: arrone }];
 let Gen = 0;
 var play = false;
 var reset = false;
+var clear = false;
 genCount.innerHTML = 0;
 
-main = document.createElement("div");
+// main = document.createElement("div");
 main.id = "main";
-body.appendChild(main);
-canvas.remove();
+// body.appendChild(main);
 
 // console.log(Gencont);
 
@@ -64,6 +100,15 @@ const clicky = (dcell, col, row) => {
   console.log(`${dcell.innerHTML},Id: ${dcell.id}`);
 };
 
+const loadSave = (e) => {
+  console.log("E: ", e.innerText);
+  let c = saves.filter((ele) => ele.name === e.innerHTML);
+  console.log("C: ", c[0].arr);
+  grid = c[0].arr.map((a) => [...a]);
+  uprender(grid);
+  requestAnimationFrame(unrender);
+};
+
 const buildDiv = () => {
   div = document.createElement("div");
   div.classList.add("numDiv");
@@ -99,7 +144,7 @@ const render = (grid) => {
         // console.log(dcell);
         clicky(dcell, col, row);
       });
-      dcell.style.backgroundColor = dcell.innerHTML === "1" ? "black" : "white";
+      dcell.style.backgroundColor = dcell.innerHTML === "1" ? dead : alive;
       main.appendChild(dcell);
     }
   }
@@ -112,7 +157,7 @@ const uprender = (grid) => {
       const cell = grid[col][row];
       let dcell = document.getElementById(`C${col}R${row}`);
       dcell.innerHTML = cell;
-      dcell.style.backgroundColor = dcell.innerHTML === "1" ? "black" : "white";
+      dcell.style.backgroundColor = dcell.innerHTML === "1" ? dead : alive;
     }
   }
 };
@@ -229,6 +274,17 @@ function nextGen(grid) {
 // }
 
 const unrender = () => {
+  if (clear) {
+    Gen = 0;
+    genCount.innerHTML = Gen;
+    clear = false;
+    play = false;
+    grid = new Array(cols)
+      .fill(null)
+      .map(() => new Array(rows).fill(null).map(() => 0));
+    uprender(grid);
+    requestAnimationFrame(unrender);
+  }
   if (reset) {
     reset = false;
     Gen = 0;
@@ -250,6 +306,11 @@ const unrender = () => {
   }
 };
 
+const changetext = (e) => {
+  savetext = e.target.value;
+};
+saveinput.addEventListener("change", changetext);
+
 const playfunc = () => {
   play = !play;
   console.log("Clicky", play);
@@ -258,9 +319,53 @@ const playfunc = () => {
   }
 };
 
+const clearfunc = () => {
+  clear = true;
+  requestAnimationFrame(unrender);
+};
+
 const resetfunc = () => {
   reset = true;
   requestAnimationFrame(unrender);
+};
+
+const checksave = () => {
+  console.log("Saves", saves);
+};
+
+const updateSaves = (ele) => {
+  const e = document.createElement("div");
+  e.innerText = ele;
+  e.classList.add("saveDiv");
+  e.addEventListener("click", () => {
+    loadSave(e);
+  });
+  saveCont.appendChild(e);
+};
+
+const savefunc = () => {
+  newsave = {
+    name: savetext,
+    arr: grid,
+  };
+  console.log("Text: ", savetext);
+  //   newsave.name = savetext;
+  if (saves.length <= 0) {
+    saves.push(newsave);
+    updateSaves(newsave.name);
+  } else {
+    n = saves.filter((ele) => ele.name === newsave.name);
+    if (n.length > 0) {
+      alert("Saves need differt names");
+    } else {
+      console.log("ADDED");
+      saves.push(newsave);
+      updateSaves(newsave.name);
+    }
+  }
+  savetext = "";
+  saveinput.value = "";
+  checksave();
 };
 
 let grid = buildGrid();
@@ -270,5 +375,8 @@ playBtn.addEventListener("click", playfunc);
 resetBtn.addEventListener("click", () => {
   resetfunc();
 });
+clearBtn.addEventListener("click", clearfunc);
 requestAnimationFrame(unrender);
+saveBtn.addEventListener("click", savefunc);
+updateSaves(saves[0].name);
 // console.log(grid)

@@ -1,3 +1,8 @@
+body {
+  text-align: center;
+  background-color: #9792ad;
+}
+
 #main {
   width: 475px;
   height: 475px;
@@ -5,6 +10,28 @@
   flex-wrap: wrap;
   padding: 5px;
   background-color: grey;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+.mainCont {
+  display: flex;
+  flex-direction: row;
+  width: 60%;
+  margin: 0 auto;
+}
+
+.rules {
+  text-align: center;
+  width: 30%;
+}
+li {
+  margin: 10px;
+}
+
+.btnCont {
+  width: 67%;
+  margin: 0 auto;
 }
 
 .numDiv {
@@ -12,5 +39,33 @@
   height: 15px;
   margin: 1px;
   border: 1px solid black;
+  border-radius: 3px;
   text-align: center;
+}
+
+.btn {
+  border: 2px solid black;
+  margin: 5px;
+  width: 10%;
+  text-align: center;
+}
+
+.saveCont {
+  width: 60%;
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto;
+}
+
+.saveDiv {
+  width: 5%;
+  margin: 3px;
+  border: 1px solid black;
+  background-color: white;
+}
+
+.save {
+  width: 25%;
+  text-align: center;
+  margin: 0 18%;
 }
